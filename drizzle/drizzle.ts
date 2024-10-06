@@ -1,12 +1,12 @@
-import { drizzle } from "drizzle-orm/mysql2";
-import mysql from "mysql2";
+import { drizzle } from 'drizzle-orm/mysql2';
+import mysql from 'mysql2';
 
 if (!process.env.DATABASE_URL) {
-	throw new Error("DATABASE_URL is not set");
+    throw new Error('The DATABASE_URL environment variable is required');
 }
 
 const connection = mysql.createConnection({
-	uri: process.env.DATABASE_URL,
+    uri: process.env.DATABASE_URL,
 });
 
 export const db = drizzle(connection);
