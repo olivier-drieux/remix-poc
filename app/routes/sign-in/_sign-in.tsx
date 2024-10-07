@@ -3,6 +3,7 @@ import { Form, useLoaderData } from '@remix-run/react';
 import { auth, sessionStorage } from '~/auth.server';
 import { Button } from '~/components/ui/button';
 import { Input } from '~/components/ui/input';
+import { Label } from '~/components/ui/label';
 
 export const action = async ({ request }: ActionFunctionArgs) => {
     await auth.authenticate('form', request, {
@@ -19,19 +20,19 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
     return { error };
 };
 
-export default function Screen() {
+export default function SignIn() {
     const { error } = useLoaderData<typeof loader>();
 
     return (
         <>
             <Form method='post'>
                 <div>
-                    <label htmlFor='identifier'>Identifier</label>
+                    <Label htmlFor='identifier'>Identifier</Label>
                     <Input name='identifier' id='identifier' />
                 </div>
 
                 <div>
-                    <label htmlFor='password'>Password</label>
+                    <Label htmlFor='password'>Password</Label>
                     <Input type='password' name='password' id='password' />
                 </div>
                 <Button>Log In</Button>

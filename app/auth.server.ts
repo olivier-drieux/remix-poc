@@ -1,7 +1,7 @@
 import { createCookieSessionStorage } from '@remix-run/node';
 import { and, eq, or } from 'drizzle-orm';
 import { db } from 'drizzle/drizzle';
-import { getSelectableUserFields, User, userSchema } from 'drizzle/schema/user-schema';
+import { type User, getSelectableUserFields, userSchema } from 'drizzle/schema/user-schema';
 import { Authenticator, AuthorizationError } from 'remix-auth';
 import { FormStrategy } from 'remix-auth-form';
 
@@ -26,8 +26,6 @@ auth.use(
     new FormStrategy(async ({ form }) => {
         const identifier = form.get('identifier');
         const password = form.get('password');
-
-        console.log('identifier', identifier, 'password', password);
 
         // replace the code below with your own authentication logic
         if (!password || typeof password !== 'string') {

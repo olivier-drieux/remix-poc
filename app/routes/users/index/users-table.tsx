@@ -1,8 +1,10 @@
+import { Link } from '@remix-run/react';
 import { type ColumnDef, flexRender, getCoreRowModel, useReactTable } from '@tanstack/react-table';
 import type { User } from 'drizzle/schema/user-schema';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '~/components/ui/table';
 
 const columns: ColumnDef<User>[] = [
+    { id: 'action', cell: ({ row }) => <Link to={`/users/${row.original.id}`}>View</Link> },
     { accessorKey: 'id', header: 'ID' },
     { accessorKey: 'username', header: 'Username' },
     { accessorKey: 'email', header: 'Email' },

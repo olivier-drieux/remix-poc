@@ -1,5 +1,5 @@
 import type { MetaFunction } from '@remix-run/node';
-import { Await, useLoaderData } from '@remix-run/react';
+import { Await, Outlet, useLoaderData } from '@remix-run/react';
 import { db } from 'drizzle/drizzle';
 import { type User, getSelectableUserFields, userSchema } from 'drizzle/schema/user-schema';
 import { Suspense } from 'react';
@@ -26,8 +26,8 @@ export default function Users() {
     const loaderData = useLoaderData<typeof loader>();
 
     return (
-        <div>
-            <h1>Users</h1>
+        <div className='h-full overflow-auto'>
+            <Outlet />
             <Suspense fallback={<div>loading...</div>}>
                 <Await resolve={loaderData.users}>{(users) => <UsersTable users={users} />}</Await>
             </Suspense>

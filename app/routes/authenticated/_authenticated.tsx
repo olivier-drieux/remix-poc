@@ -17,7 +17,7 @@ export const loader = async ({ request }: LoaderFunctionArgs) => {
 
 export default function Authenticated() {
     const { user } = useLoaderData<typeof loader>();
-    console.log(user);
+
     return (
         <div className='w-screen h-full flex flex-col items-center justify-center gap-4'>
             <h1 className='text-4xl text-center'>
