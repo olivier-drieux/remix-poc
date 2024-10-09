@@ -1,7 +1,7 @@
 import type { MetaFunction } from '@remix-run/node';
 import { Await, Outlet, useLoaderData } from '@remix-run/react';
 import { db } from 'drizzle/drizzle';
-import { type User, getSelectableUserFields, userSchema } from 'drizzle/schema/user-schema';
+import { getSelectableUserFields, User, userSchema } from 'drizzle/schema/user-schema';
 import { Suspense } from 'react';
 import UsersTable from './users-table';
 
@@ -14,11 +14,9 @@ export const meta: MetaFunction = () => {
 
 export async function loader() {
     return {
-        users: new Promise((resolve) => {
-            setTimeout(() => {
-                resolve(db.select(getSelectableUserFields).from(userSchema).execute());
-            }, 2000);
-        }) as Promise<User[]>,
+        users: new Promise((resolve) =>
+            setTimeout(() => resolve(db.select(getSelectableUserFields).from(userSchema).execute()), 2000)
+        ) as Promise<User[]>,
     };
 }
 
